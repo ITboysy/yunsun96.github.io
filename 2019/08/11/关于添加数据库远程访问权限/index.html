@@ -6,18 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | 学习与吃</title>
+  <title>关于添加数据库远程访问权限 | 学习与吃</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="想吃好也想变强">
-<meta property="og:type" content="website">
-<meta property="og:title" content="学习与吃">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="如何访问本地或虚拟机数据库">
+<meta name="keywords" content="mysql 虚拟机">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于添加数据库远程访问权限">
+<meta property="og:url" content="http://yoursite.com/2019/08/11/关于添加数据库远程访问权限/index.html">
 <meta property="og:site_name" content="学习与吃">
-<meta property="og:description" content="想吃好也想变强">
+<meta property="og:description" content="如何访问本地或虚拟机数据库">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/.com//%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C.png">
+<meta property="og:updated_time" content="2019-08-11T15:33:25.630Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="学习与吃">
-<meta name="twitter:description" content="想吃好也想变强">
+<meta name="twitter:title" content="关于添加数据库远程访问权限">
+<meta name="twitter:description" content="如何访问本地或虚拟机数据库">
+<meta name="twitter:image" content="http://yoursite.com/.com//%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C.png">
   
     <link rel="alternative" href="/atom.xml" title="学习与吃" type="application/atom+xml">
   
@@ -153,36 +157,74 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-关于添加数据库远程访问权限" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      关于添加数据库远程访问权限
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/11/关于添加数据库远程访问权限/" class="archive-article-date">
+
+        
+        <a href="/2019/08/11/关于添加数据库远程访问权限/" class="archive-article-date">
   	<time datetime="2019-08-11T15:24:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-11</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/11/关于添加数据库远程访问权限/">关于添加数据库远程访问权限</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如果想要通过网站或者其他途径连接远程数据库，一般需要配置数据库权限或者进行数据库端口映射</p>
+<a id="more"></a>
 
-        <div class="article-info info-on-right">
-          
+<p>Ⅰ 在本地查看数据库<br>     use mysql；</p>
+<pre><code> select * from user 查看数据库下用户权限
+
+  1. GRANT ALL PRIVILEGES ON *.* TO &apos;root&apos;@&apos;%&apos; IDENTIFIED BY &apos;123456&apos;  
+    这里的123456为你给新增权限用户设置的密码，%代表所有主机，也可以具体到你的主机ip地址
+
+  2.flush privileges;         这一步一定要做，不然无法成功！ 这句表示从mysql数据库的grant表中重新加载权限数据
+
+    因为MySQL把权限都放在了cache中，所以在做完更改后需要重新加载。
+
+然后就可以连接本地数据库了</code></pre><p>Ⅱ 连接虚拟机数据库<br>      1.在centos7中打开虚拟网络编辑器，进入管理员模式<br>    <img src="/.com//%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C.png" alt="虚拟机网络图片"></p>
+<pre><code>  2.然后对选择NAT模式进行NAT设置，主机端口就是你外部访问的port，虚拟机IP在命令模式ifconfig可以查看，虚拟机端
+口就是你的数据库端口，一般默认3306
+
+![NAT网络选项](关于添加数据库远程访问权限/NAT端口设置.png)
+
+设置好之后确认就可以在外部访问虚拟机数据库！</code></pre>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -194,84 +236,119 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/11/关于添加数据库远程访问权限/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/11/新建文本文档/" class="archive-article-date">
-  	<time datetime="2019-08-11T07:22:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-11</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/08/11/新建文本文档/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">关于添加数据库远程访问权限</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/11/新建文本文档/">关于添加数据库远程访问权限</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">mysql 虚拟机</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/11/第一篇测试文章/" class="archive-article-date">
-  	<time datetime="2019-08-11T07:22:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-11</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/11/第一篇测试文章/">第一篇测试文章</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -294,8 +371,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
