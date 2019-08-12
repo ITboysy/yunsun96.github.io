@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="学习与吃">
 <meta property="og:description" content="如何访问本地或虚拟机数据库">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-08-12T02:19:24.138Z">
+<meta property="og:updated_time" content="2019-08-12T02:28:08.406Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于添加数据库远程访问权限">
 <meta name="twitter:description" content="如何访问本地或虚拟机数据库">
@@ -188,10 +188,8 @@
 
     因为MySQL把权限都放在了cache中，所以在做完更改后需要重新加载。
 
-然后就可以连接本地数据库了</code></pre><p>Ⅱ 连接虚拟机数据库<br>      1.在centos7中打开虚拟网络编辑器，进入管理员模式</p>
-<pre><code>&lt;img src=&quot;/关于添加数据库远程访问权限/虚拟机网络.png&quot;,alt=&quot;first&quot;&gt;
-
-  2.然后对选择NAT模式进行NAT设置，主机端口就是你外部访问的port，虚拟机IP在命令模式ifconfig可以查看，虚拟机端
+然后就可以连接本地数据库了</code></pre><p>Ⅱ 连接虚拟机数据库<br>      1.在centos7中打开虚拟网络编辑器，进入管理员模式<br>&lt;img src=”/关于添加数据库远程访问权限/虚拟机网络.png”,alt=”first”&gt;</p>
+<pre><code>  2.然后对选择NAT模式进行NAT设置，主机端口就是你外部访问的port，虚拟机IP在命令模式ifconfig可以查看，虚拟机端
 口就是你的数据库端口，一般默认3306
 
 ![NAT网络选项](关于添加数据库远程访问权限/NAT端口设置.png)
