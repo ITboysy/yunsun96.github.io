@@ -155,6 +155,214 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-线程池" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/16/线程池/">线程池</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/16/线程池/" class="archive-article-date">
+  	<time datetime="2019-08-16T07:02:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="关于线程池的概念与原理"><a href="#关于线程池的概念与原理" class="headerlink" title="关于线程池的概念与原理"></a>关于线程池的概念与原理</h1><p>一般对于数量极少的线程可以通过一个个去创建，当线程数量过多且线程运行时间过短的时候需要通过线程池去创建且可以进行复用。</p>
+<h3 id="java中的ThreadPoolExecutor类"><a href="#java中的ThreadPoolExecutor类" class="headerlink" title="java中的ThreadPoolExecutor类"></a>java中的ThreadPoolExecutor类</h3><p>​    ThreadPoolExecutor 有四个构造方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>` `<span class="class"><span class="keyword">class</span>` `<span class="title">ThreadPoolExecutor</span> ``<span class="keyword">extends</span>` `<span class="title">AbstractExecutorService</span> </span>&#123;</span><br><span class="line">    ``.....</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize,<span class="keyword">int</span> maximumPoolSize,<span class="keyword">long</span>` keepAliveTime,TimeUnit unit,</span></span></span><br><span class="line"><span class="function"><span class="params">            BlockingQueue&lt;Runnable&gt; workQueue)</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize,<span class="keyword">int</span> maximumPoolSize,<span class="keyword">long</span> keepAliveTime,TimeUnit unit,</span></span></span><br><span class="line"><span class="function"><span class="params">        BlockingQueue&lt;Runnable&gt; workQueue,ThreadFactory threadFactory)</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize,<span class="keyword">int</span> maximumPoolSize,<span class="keyword">long</span> `keepAliveTime,TimeUnit unit,</span></span></span><br><span class="line"><span class="function"><span class="params">        BlockingQueue&lt;Runnable&gt; workQueue,RejectedExecutionHandler handler)</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize,<span class="keyword">int</span> `maximumPoolSize,<span class="keyword">long</span>` `keepAliveTime,TimeUnit unit,BlockingQueue&lt;Runnable&gt; workQueue,ThreadFactory threadFactory,RejectedExecutionHandler handler)</span></span>;</span><br><span class="line">    ``...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>corePoolSize：线程池基本大小，创建线程池后，线程池中没用任何线程，而在等待有任务进来后才创建，除非调用prestartAllCoreThreads()或者prestartCoreThread()方法预先创建线程。当线程数量多于corePoolSize后就会把线程放入缓存队列。</p>
+<p>maximumPoolSize：线程池最大数量=队列线程数量+corePoolSize。当线程数量超过后就会拒绝增加线程。</p>
+<p>keepAliveTime：表示线程没有任务执行时多久时间终止，只有在当前线程池数量大于corePoolSize时才会生效，直到线程数量不大于corePoolSzie。当调用allowCoreThreadTimeOut(boolean)方法，在线程池中的线程数不大于corePoolSize时，keepAliveTime参数也会起作用，直到线程池中的线程数为0；</p>
+<p>workQueue：缓存队列，用来存放等待被执行的任务。<img src="//yoursite.com/2019/08/16/线程池/D:%5CJavaTools%5Cnodejs%5Cblog%5Csource_posts%5C%E7%BA%BF%E7%A8%8B%E6%B1%A0%5C%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%9B%BE.jpg" alt="线程池图"></p>
+<h3 id="深入剖析线程池实现原理"><a href="#深入剖析线程池实现原理" class="headerlink" title="深入剖析线程池实现原理"></a>深入剖析线程池实现原理</h3><h4 id="线程池状态："><a href="#线程池状态：" class="headerlink" title="线程池状态："></a>线程池状态：</h4><table>
+<thead>
+<tr>
+<th>volatile变量：<code>volatile</code> <code>int</code> runState;</th>
+<th align="center">值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>static<code></code>final<code></code>int<code></code>RUNNING</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td><code>static</code> <code>final</code> <code>int</code> SHUTDOWN</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td><code>static</code> <code>final</code> <code>int</code> STOP</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td><code>static</code> <code>final</code> <code>int</code> TERMINATED</td>
+<td align="center">3</td>
+</tr>
+</tbody></table>
+<p>线程池第一次创建属于RUNNING，且上文说过不会创建任何线程。</p>
+<p>调用shutdown()方法线程池属于SHOUTDOWN状态，线程池将会停止接受任务，并等待已有任务的执行完毕；</p>
+<p>调用shotdownNow()方法则线程处于STOP状态，并开始终止正在执行的任务；</p>
+<p>当线程中所有工作线程被销毁，且任务缓存队列已经处理完毕线程将会进入TERMINATED状态；</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>1）首先，要清楚corePoolSize和maximumPoolSize的含义；</p>
+<p>　　2）其次，要知道Worker是用来起到什么作用的；</p>
+<!--在ThreadPool中是有一个workder集合的。通过这个集合，我们可以知道有多少worker线程在进行工作等，每一个worker都是各自进行工作，工作的内容就是不停的获取task，然后执行task即可。-->
+
+<p>　　3）要知道任务提交给线程池之后的处理策略，这里总结一下主要有4点：</p>
+<ul>
+<li>如果当前线程池中的线程数目小于corePoolSize，则每来一个任务，就会创建一个线程去执行这个任务；</li>
+<li>如果当前线程池中的线程数目&gt;=corePoolSize，则每来一个任务，会尝试将其添加到任务缓存队列当中，若添加成功，则该任务会等待空闲线程将其取出去执行；若添加失败（一般来说是任务缓存队列已满），则会尝试创建新的线程去执行这个任务；</li>
+<li>如果当前线程池中的线程数目达到maximumPoolSize，则会采取任务拒绝策略进行处理；</li>
+<li>如果线程池中的线程数量大于 corePoolSize时，如果某线程空闲时间超过keepAliveTime，线程将被终止，直至线程池中的线程数目不大于corePoolSize；如果允许为核心池中的线程设置存活时间，那么核心池中的线程空闲时间超过keepAliveTime，线程也会被终止。</li>
+</ul>
+<p>3.线程池中的线程初始化</p>
+<p>　　默认情况下，创建线程池之后，线程池中是没有线程的，需要提交任务之后才会创建线程。</p>
+<p>　　在实际中如果需要线程池创建之后立即创建线程，可以通过以下两个方法办到：</p>
+<ul>
+<li>prestartCoreThread()：初始化一个核心线程；</li>
+<li>prestartAllCoreThreads()：初始化所有核心线程</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">线程池</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/16/线程池/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-redis操作命令笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/15/redis操作命令笔记/">redis操作命令笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/15/redis操作命令笔记/" class="archive-article-date">
+  	<time datetime="2019-08-15T13:29:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>当启动redis后，通过docker ps查看redis类似ID的名称</p>
+<p>redis客户端连接命令：docker exec -it <strong>0b63b7eacc29</strong> redis-cli </p>
+<p>set xxx ‘xxx’  设置值可以覆盖之前值，setnx xxx ’xxx’  存在则不set返回0</p>
+<p>setex 设置存在时间，过期清空</p>
+<p>setrange  xxx 10 ww <!--(设置XXX从第10位替换成WW，下标0开始)--></p>
+<p>incr decr  递增和递减1方法</p>
+<p>incrby decrby 递增递减指定长度 <!--incrby xxx  10--></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/15/redis操作命令笔记/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-关于添加数据库远程访问权限" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -394,6 +602,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">线程池</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">mysql 虚拟机</a>

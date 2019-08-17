@@ -193,7 +193,7 @@
 然后就可以连接本地数据库了</code></pre><p>Ⅱ 连接虚拟机数据库<br>      1.在centos7中打开虚拟网络编辑器，进入管理员模式<br>      <img src="/2019/08/11/关于添加数据库远程访问权限/虚拟机网络.png" title="This is an image"></p>
 <pre><code>  2.然后对选择NAT模式进行NAT设置，主机端口就是你外部访问的port，虚拟机IP在命令模式ifconfig可以查看，虚拟机端
 口就是你的数据库端口，一般默认3306，设置好之后确认就可以在外部访问虚拟机数据库！
-  </code>{% asset_img NAT端口设置.png This is an image %}</pre>
+  {% asset_img NAT端口设置.png This is an image %}</code></pre>
       
 
       
@@ -296,6 +296,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/08/15/redis操作命令笔记/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          redis操作命令笔记
+        
+      </div>
+    </a>
   
   
     <a href="/2019/08/11/第一篇测试文章/" id="article-nav-older" class="article-nav-link-wrap">
@@ -446,6 +455,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">线程池</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">mysql 虚拟机</a>

@@ -6,18 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: mysql 虚拟机 | 学习与吃</title>
+  <title>线程池 | 学习与吃</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="想吃好也想变强">
-<meta property="og:type" content="website">
-<meta property="og:title" content="学习与吃">
-<meta property="og:url" content="http://yoursite.com/tags/mysql-虚拟机/index.html">
+  <meta name="description" content="关于线程池的概念与原理一般对于数量极少的线程可以通过一个个去创建，当线程数量过多且线程运行时间过短的时候需要通过线程池去创建且可以进行复用。 java中的ThreadPoolExecutor类​    ThreadPoolExecutor 有四个构造方法 1234public` `class` `ThreadPoolExecutor ``extends` `AbstractExecutorServ">
+<meta name="keywords" content="线程池">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线程池">
+<meta property="og:url" content="http://yoursite.com/2019/08/16/线程池/index.html">
 <meta property="og:site_name" content="学习与吃">
-<meta property="og:description" content="想吃好也想变强">
+<meta property="og:description" content="关于线程池的概念与原理一般对于数量极少的线程可以通过一个个去创建，当线程数量过多且线程运行时间过短的时候需要通过线程池去创建且可以进行复用。 java中的ThreadPoolExecutor类​    ThreadPoolExecutor 有四个构造方法 1234public` `class` `ThreadPoolExecutor ``extends` `AbstractExecutorServ">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2019/08/16/线程池/D:%5CJavaTools%5Cnodejs%5Cblog%5Csource_posts%5C%E7%BA%BF%E7%A8%8B%E6%B1%A0%5C%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%9B%BE.jpg">
+<meta property="og:updated_time" content="2019-08-17T08:35:07.316Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="学习与吃">
-<meta name="twitter:description" content="想吃好也想变强">
+<meta name="twitter:title" content="线程池">
+<meta name="twitter:description" content="关于线程池的概念与原理一般对于数量极少的线程可以通过一个个去创建，当线程数量过多且线程运行时间过短的时候需要通过线程池去创建且可以进行复用。 java中的ThreadPoolExecutor类​    ThreadPoolExecutor 有四个构造方法 1234public` `class` `ThreadPoolExecutor ``extends` `AbstractExecutorServ">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/16/线程池/D:%5CJavaTools%5Cnodejs%5Cblog%5Csource_posts%5C%E7%BA%BF%E7%A8%8B%E6%B1%A0%5C%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%9B%BE.jpg">
   
     <link rel="alternative" href="/atom.xml" title="学习与吃" type="application/atom+xml">
   
@@ -153,60 +157,245 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-线程池" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/11/关于添加数据库远程访问权限/" class="archive-article-date">
-  	<time datetime="2019-08-11T15:24:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-11</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/11/关于添加数据库远程访问权限/">关于添加数据库远程访问权限</a>
+    <h1 class="article-title" itemprop="name">
+      线程池
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/08/16/线程池/" class="archive-article-date">
+  	<time datetime="2019-08-16T07:02:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="关于线程池的概念与原理"><a href="#关于线程池的概念与原理" class="headerlink" title="关于线程池的概念与原理"></a>关于线程池的概念与原理</h1><p>一般对于数量极少的线程可以通过一个个去创建，当线程数量过多且线程运行时间过短的时候需要通过线程池去创建且可以进行复用。</p>
+<h3 id="java中的ThreadPoolExecutor类"><a href="#java中的ThreadPoolExecutor类" class="headerlink" title="java中的ThreadPoolExecutor类"></a>java中的ThreadPoolExecutor类</h3><p>​    ThreadPoolExecutor 有四个构造方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>` `<span class="class"><span class="keyword">class</span>` `<span class="title">ThreadPoolExecutor</span> ``<span class="keyword">extends</span>` `<span class="title">AbstractExecutorService</span> </span>&#123;</span><br><span class="line">    ``.....</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize,<span class="keyword">int</span> maximumPoolSize,<span class="keyword">long</span>` keepAliveTime,TimeUnit unit,</span></span></span><br><span class="line"><span class="function"><span class="params">            BlockingQueue&lt;Runnable&gt; workQueue)</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize,<span class="keyword">int</span> maximumPoolSize,<span class="keyword">long</span> keepAliveTime,TimeUnit unit,</span></span></span><br><span class="line"><span class="function"><span class="params">        BlockingQueue&lt;Runnable&gt; workQueue,ThreadFactory threadFactory)</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize,<span class="keyword">int</span> maximumPoolSize,<span class="keyword">long</span> `keepAliveTime,TimeUnit unit,</span></span></span><br><span class="line"><span class="function"><span class="params">        BlockingQueue&lt;Runnable&gt; workQueue,RejectedExecutionHandler handler)</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize,<span class="keyword">int</span> `maximumPoolSize,<span class="keyword">long</span>` `keepAliveTime,TimeUnit unit,BlockingQueue&lt;Runnable&gt; workQueue,ThreadFactory threadFactory,RejectedExecutionHandler handler)</span></span>;</span><br><span class="line">    ``...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>corePoolSize：线程池基本大小，创建线程池后，线程池中没用任何线程，而在等待有任务进来后才创建，除非调用prestartAllCoreThreads()或者prestartCoreThread()方法预先创建线程。当线程数量多于corePoolSize后就会把线程放入缓存队列。</p>
+<p>maximumPoolSize：线程池最大数量=队列线程数量+corePoolSize。当线程数量超过后就会拒绝增加线程。</p>
+<p>keepAliveTime：表示线程没有任务执行时多久时间终止，只有在当前线程池数量大于corePoolSize时才会生效，直到线程数量不大于corePoolSzie。当调用allowCoreThreadTimeOut(boolean)方法，在线程池中的线程数不大于corePoolSize时，keepAliveTime参数也会起作用，直到线程池中的线程数为0；</p>
+<p>workQueue：缓存队列，用来存放等待被执行的任务。<img src="//yoursite.com/2019/08/16/线程池/D:%5CJavaTools%5Cnodejs%5Cblog%5Csource_posts%5C%E7%BA%BF%E7%A8%8B%E6%B1%A0%5C%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%9B%BE.jpg" alt="线程池图"></p>
+<h3 id="深入剖析线程池实现原理"><a href="#深入剖析线程池实现原理" class="headerlink" title="深入剖析线程池实现原理"></a>深入剖析线程池实现原理</h3><h4 id="线程池状态："><a href="#线程池状态：" class="headerlink" title="线程池状态："></a>线程池状态：</h4><table>
+<thead>
+<tr>
+<th>volatile变量：<code>volatile</code> <code>int</code> runState;</th>
+<th align="center">值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>static<code></code>final<code></code>int<code></code>RUNNING</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td><code>static</code> <code>final</code> <code>int</code> SHUTDOWN</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td><code>static</code> <code>final</code> <code>int</code> STOP</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td><code>static</code> <code>final</code> <code>int</code> TERMINATED</td>
+<td align="center">3</td>
+</tr>
+</tbody></table>
+<p>线程池第一次创建属于RUNNING，且上文说过不会创建任何线程。</p>
+<p>调用shutdown()方法线程池属于SHOUTDOWN状态，线程池将会停止接受任务，并等待已有任务的执行完毕；</p>
+<p>调用shotdownNow()方法则线程处于STOP状态，并开始终止正在执行的任务；</p>
+<p>当线程中所有工作线程被销毁，且任务缓存队列已经处理完毕线程将会进入TERMINATED状态；</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>1）首先，要清楚corePoolSize和maximumPoolSize的含义；</p>
+<p>　　2）其次，要知道Worker是用来起到什么作用的；</p>
+<!--在ThreadPool中是有一个workder集合的。通过这个集合，我们可以知道有多少worker线程在进行工作等，每一个worker都是各自进行工作，工作的内容就是不停的获取task，然后执行task即可。-->
+
+<p>　　3）要知道任务提交给线程池之后的处理策略，这里总结一下主要有4点：</p>
+<ul>
+<li>如果当前线程池中的线程数目小于corePoolSize，则每来一个任务，就会创建一个线程去执行这个任务；</li>
+<li>如果当前线程池中的线程数目&gt;=corePoolSize，则每来一个任务，会尝试将其添加到任务缓存队列当中，若添加成功，则该任务会等待空闲线程将其取出去执行；若添加失败（一般来说是任务缓存队列已满），则会尝试创建新的线程去执行这个任务；</li>
+<li>如果当前线程池中的线程数目达到maximumPoolSize，则会采取任务拒绝策略进行处理；</li>
+<li>如果线程池中的线程数量大于 corePoolSize时，如果某线程空闲时间超过keepAliveTime，线程将被终止，直至线程池中的线程数目不大于corePoolSize；如果允许为核心池中的线程设置存活时间，那么核心池中的线程空闲时间超过keepAliveTime，线程也会被终止。</li>
+</ul>
+<p>3.线程池中的线程初始化</p>
+<p>　　默认情况下，创建线程池之后，线程池中是没有线程的，需要提交任务之后才会创建线程。</p>
+<p>　　在实际中如果需要线程池创建之后立即创建线程，可以通过以下两个方法办到：</p>
+<ul>
+<li>prestartCoreThread()：初始化一个核心线程；</li>
+<li>prestartAllCoreThreads()：初始化所有核心线程</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">mysql 虚拟机</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">线程池</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/16/线程池/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/08/15/redis操作命令笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">redis操作命令笔记</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#关于线程池的概念与原理"><span class="toc-number">1.</span> <span class="toc-text">关于线程池的概念与原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#java中的ThreadPoolExecutor类"><span class="toc-number">1.0.1.</span> <span class="toc-text">java中的ThreadPoolExecutor类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#深入剖析线程池实现原理"><span class="toc-number">1.0.2.</span> <span class="toc-text">深入剖析线程池实现原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#线程池状态："><span class="toc-number">1.0.2.1.</span> <span class="toc-text">线程池状态：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结："><span class="toc-number">1.1.</span> <span class="toc-text">总结：</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -229,9 +418,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
