@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="学习与吃">
 <meta property="og:description" content="当启动redis后，通过docker ps查看redis类似ID的名称">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-08-17T08:37:44.441Z">
+<meta property="og:updated_time" content="2019-08-18T06:45:40.147Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis操作命令笔记">
 <meta name="twitter:description" content="当启动redis后，通过docker ps查看redis类似ID的名称">
@@ -183,6 +183,13 @@
 <p>setrange  xxx 10 ww <!--(设置XXX从第10位替换成WW，下标0开始)--></p>
 <p>incr decr  递增和递减1方法</p>
 <p>incrby decrby 递增递减指定长度 <!--incrby xxx  10--></p>
+<p>hgetall 获得所有hash对象的值</p>
+<p>list: lpush 从头部开始添加元素，先进后出</p>
+<p>​       rpush 从尾部添加元素，先进先出</p>
+<p>lrange xxx 0 -1 (表示从头取到尾)</p>
+<p>linsert xxx before [集合元素]  [插入的元素]</p>
+<p>lset xxx 0 ‘xxx’ 替换指定下标元素</p>
+<p>lrem  xxx [移除的个数]  [移除的元素值] 删除元素 </p>
 
       
 
@@ -436,11 +443,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">mysql 虚拟机</a>
+                <a href="javascript:void(0)" class="js-tag color4">线程池</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线程池</a>
+                <a href="javascript:void(0)" class="js-tag color5">mysql 虚拟机</a>
               </li>
             
             <div class="clearfix"></div>
