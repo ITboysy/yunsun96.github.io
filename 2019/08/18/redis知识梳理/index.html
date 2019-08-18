@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019/8 | 学习与吃</title>
+  <title>redis知识梳理 | 学习与吃</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="想吃好也想变强">
-<meta property="og:type" content="website">
-<meta property="og:title" content="学习与吃">
-<meta property="og:url" content="http://yoursite.com/archives/2019/08/index.html">
+  <meta name="description" content="redis-&amp;gt;非关系型数据库：键值数据库：哈希表 ；列存储数据库：分布式；文档数据库：json-&amp;gt;MongoDb；图形数据库；">
+<meta name="keywords" content="redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis知识梳理">
+<meta property="og:url" content="http://yoursite.com/2019/08/18/redis知识梳理/index.html">
 <meta property="og:site_name" content="学习与吃">
-<meta property="og:description" content="想吃好也想变强">
+<meta property="og:description" content="redis-&amp;gt;非关系型数据库：键值数据库：哈希表 ；列存储数据库：分布式；文档数据库：json-&amp;gt;MongoDb；图形数据库；">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-08-18T08:34:14.164Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="学习与吃">
-<meta name="twitter:description" content="想吃好也想变强">
+<meta name="twitter:title" content="redis知识梳理">
+<meta name="twitter:description" content="redis-&amp;gt;非关系型数据库：键值数据库：哈希表 ；列存储数据库：分布式；文档数据库：json-&amp;gt;MongoDb；图形数据库；">
   
     <link rel="alternative" href="/atom.xml" title="学习与吃" type="application/atom+xml">
   
@@ -153,36 +155,84 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-redis知识梳理" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/18/redis知识梳理/" class="archive-article-date">
-  	<time datetime="2019-08-18T06:53:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-18</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/18/redis知识梳理/">redis知识梳理</a>
+    <h1 class="article-title" itemprop="name">
+      redis知识梳理
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/08/18/redis知识梳理/" class="archive-article-date">
+  	<time datetime="2019-08-18T06:53:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="redis-gt-非关系型数据库："><a href="#redis-gt-非关系型数据库：" class="headerlink" title="redis-&gt;非关系型数据库："></a>redis-&gt;非关系型数据库：</h1><h4 id="键值数据库：哈希表-；列存储数据库：分布式；文档数据库：json-gt-MongoDb；图形数据库；"><a href="#键值数据库：哈希表-；列存储数据库：分布式；文档数据库：json-gt-MongoDb；图形数据库；" class="headerlink" title="键值数据库：哈希表 ；列存储数据库：分布式；文档数据库：json-&gt;MongoDb；图形数据库；"></a>键值数据库：哈希表 ；列存储数据库：分布式；文档数据库：json-&gt;MongoDb；图形数据库；</h4><a id="more"></a>
+
+<h1 id="分关系型数据库特点："><a href="#分关系型数据库特点：" class="headerlink" title="分关系型数据库特点："></a>分关系型数据库特点：</h1><ol>
+<li>数据模型简单;</li>
+<li>需要灵活性强的IT系统；</li>
+<li>对数据库性能要求高；</li>
+<li>不需要高度的数据一致性；(ACID要求不高)</li>
+<li>对于给定KEY，比较容易映射复杂值;</li>
+</ol>
+<hr>
+<h2 id="redis-优缺点："><a href="#redis-优缺点：" class="headerlink" title="redis 优缺点："></a>redis 优缺点：</h2><p>优点：</p>
+<ul>
+<li>对数据高并发读写</li>
+<li>对海量数据的高效率存储和访问</li>
+<li>对数据的可扩展性和高可用性</li>
+</ul>
+<p>可扩展包含水平垂直，水平增加集群数量，垂直增加主机数量</p>
+<p>缺点：redis(ACID处理非常简单)无法做到太复杂的关系数据库模型</p>
+<h2 id="redis介绍："><a href="#redis介绍：" class="headerlink" title="redis介绍："></a>redis介绍：</h2><p>一个缓存工具，缓解数据库压力，带来更快的常用数据访问速度。key-value存储，键包含：String、hash、list链表、set集合、zset有序集合，五种数据类型不过多阐述。数据缓存到内存中保证效率，也可以周期性把更新的数据写入磁盘(RDB)或者把修改操作追加到文件中(AOF)(可靠性)。redis所有操作都是原子性，要么全部执行要么全部不执行。</p>
+<h5 id="两种持久化方式AOF对比RDB："><a href="#两种持久化方式AOF对比RDB：" class="headerlink" title="两种持久化方式AOF对比RDB："></a>两种持久化方式AOF对比RDB：</h5><p>AOF相比较RDB数据安全性更高，而且AOF是append模式，不会破坏日志中已经存在的内容。</p>
+<p>RDB文件备份方便，只包含一个文件，容易转移和恢复，性能最大化，通过fork子进程完成持久化，避免redis服务进行io操作。</p>
+<p>只做缓存不需要开启任何持久化方式。</p>
+<!--fork()函数：创建一个与原来进程几乎完全相同的进程，跟参数与传入变量不同做不同的事。-->
+
+<h5 id="三种配置策略："><a href="#三种配置策略：" class="headerlink" title="三种配置策略："></a>三种配置策略：</h5><ol>
+<li>主从   主从机器分布，主机挂了其他也挂</li>
+<li>哨兵   主从外加哨兵，哨兵监控主从当主机挂了选举从节点当主节点</li>
+<li>集群   主从集群</li>
+</ol>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -194,176 +244,119 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/18/redis知识梳理/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/18/jvm/" class="archive-article-date">
-  	<time datetime="2019-08-18T06:32:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-18</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/08/18/jvm/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">jvm</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/18/jvm/">jvm</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#redis-gt-非关系型数据库："><span class="toc-number">1.</span> <span class="toc-text">redis-&gt;非关系型数据库：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#键值数据库：哈希表-；列存储数据库：分布式；文档数据库：json-gt-MongoDb；图形数据库；"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">键值数据库：哈希表 ；列存储数据库：分布式；文档数据库：json-&gt;MongoDb；图形数据库；</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分关系型数据库特点："><span class="toc-number">2.</span> <span class="toc-text">分关系型数据库特点：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#redis-优缺点："><span class="toc-number">2.1.</span> <span class="toc-text">redis 优缺点：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redis介绍："><span class="toc-number">2.2.</span> <span class="toc-text">redis介绍：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#两种持久化方式AOF对比RDB："><span class="toc-number">2.2.0.0.1.</span> <span class="toc-text">两种持久化方式AOF对比RDB：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#三种配置策略："><span class="toc-number">2.2.0.0.2.</span> <span class="toc-text">三种配置策略：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/16/线程池/" class="archive-article-date">
-  	<time datetime="2019-08-16T07:02:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-16</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/16/线程池/">线程池</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">线程池</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/15/redis操作命令笔记/" class="archive-article-date">
-  	<time datetime="2019-08-15T13:29:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/15/redis操作命令笔记/">redis操作命令笔记</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/11/关于添加数据库远程访问权限/" class="archive-article-date">
-  	<time datetime="2019-08-11T15:24:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/11/关于添加数据库远程访问权限/">关于添加数据库远程访问权限</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">mysql 虚拟机</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/11/第一篇测试文章/" class="archive-article-date">
-  	<time datetime="2019-08-11T07:22:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/11/第一篇测试文章/">第一篇测试文章</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -386,8 +379,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
