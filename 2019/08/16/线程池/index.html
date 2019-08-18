@@ -16,12 +16,12 @@
 <meta property="og:site_name" content="学习与吃">
 <meta property="og:description" content="关于线程池的概念与原理一般对于数量极少的线程可以通过一个个去创建，当线程数量过多且线程运行时间过短的时候需要通过线程池去创建且可以进行复用。">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/2019/08/16/线程池/%E7%BA%BF%E7%A8%8B%E6%B1%A0%5C%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%9B%BE.jpg">
-<meta property="og:updated_time" content="2019-08-18T12:28:15.388Z">
+<meta property="og:image" content="http://yoursite.com/2019/08/16/线程池/D:%5CJavaTools%5Cnodejs%5Cblog%5Csource_posts%5C%E7%BA%BF%E7%A8%8B%E6%B1%A0%5C%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%9B%BE.jpg">
+<meta property="og:updated_time" content="2019-08-18T12:38:56.205Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线程池">
 <meta name="twitter:description" content="关于线程池的概念与原理一般对于数量极少的线程可以通过一个个去创建，当线程数量过多且线程运行时间过短的时候需要通过线程池去创建且可以进行复用。">
-<meta name="twitter:image" content="http://yoursite.com/2019/08/16/线程池/%E7%BA%BF%E7%A8%8B%E6%B1%A0%5C%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%9B%BE.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/16/线程池/D:%5CJavaTools%5Cnodejs%5Cblog%5Csource_posts%5C%E7%BA%BF%E7%A8%8B%E6%B1%A0%5C%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%9B%BE.jpg">
   
     <link rel="alternative" href="/atom.xml" title="学习与吃" type="application/atom+xml">
   
@@ -199,7 +199,7 @@
 <p>maximumPoolSize：线程池最大数量=队列线程数量+corePoolSize。当线程数量超过后就会拒绝增加线程。</p>
 <p>keepAliveTime：表示线程没有任务执行时多久时间终止，只有在当前线程池数量大于corePoolSize时才会生效，直到线程数量不大于corePoolSzie。当调用allowCoreThreadTimeOut(boolean)方法，在线程池中的线程数不大于corePoolSize时，keepAliveTime参数也会起作用，直到线程池中的线程数为0；</p>
 <p>workQueue：缓存队列，用来存放等待被执行的任务。</p>
-<p><img src="//yoursite.com/2019/08/16/线程池/%E7%BA%BF%E7%A8%8B%E6%B1%A0%5C%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%9B%BE.jpg" alt></p>
+<p><img src="//yoursite.com/2019/08/16/线程池/D:%5CJavaTools%5Cnodejs%5Cblog%5Csource_posts%5C%E7%BA%BF%E7%A8%8B%E6%B1%A0%5C%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%9B%BE.jpg" alt="线程池流程图片"></p>
 <h3 id="深入剖析线程池实现原理"><a href="#深入剖析线程池实现原理" class="headerlink" title="深入剖析线程池实现原理"></a>深入剖析线程池实现原理</h3><h4 id="线程池状态："><a href="#线程池状态：" class="headerlink" title="线程池状态："></a>线程池状态：</h4><table>
 <thead>
 <tr>
