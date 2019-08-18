@@ -17,7 +17,7 @@
 <meta property="og:description" content="关于线程池的概念与原理一般对于数量极少的线程可以通过一个个去创建，当线程数量过多且线程运行时间过短的时候需要通过线程池去创建且可以进行复用。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/2019/08/16/线程池/D:%5CJavaTools%5Cnodejs%5Cblog%5Csource_posts%5C%E7%BA%BF%E7%A8%8B%E6%B1%A0%5C%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%9B%BE.jpg">
-<meta property="og:updated_time" content="2019-08-17T08:37:52.128Z">
+<meta property="og:updated_time" content="2019-08-18T12:22:59.199Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线程池">
 <meta name="twitter:description" content="关于线程池的概念与原理一般对于数量极少的线程可以通过一个个去创建，当线程数量过多且线程运行时间过短的时候需要通过线程池去创建且可以进行复用。">
@@ -198,7 +198,8 @@
 <p>corePoolSize：线程池基本大小，创建线程池后，线程池中没用任何线程，而在等待有任务进来后才创建，除非调用prestartAllCoreThreads()或者prestartCoreThread()方法预先创建线程。当线程数量多于corePoolSize后就会把线程放入缓存队列。</p>
 <p>maximumPoolSize：线程池最大数量=队列线程数量+corePoolSize。当线程数量超过后就会拒绝增加线程。</p>
 <p>keepAliveTime：表示线程没有任务执行时多久时间终止，只有在当前线程池数量大于corePoolSize时才会生效，直到线程数量不大于corePoolSzie。当调用allowCoreThreadTimeOut(boolean)方法，在线程池中的线程数不大于corePoolSize时，keepAliveTime参数也会起作用，直到线程池中的线程数为0；</p>
-<p>workQueue：缓存队列，用来存放等待被执行的任务。<img src="//yoursite.com/2019/08/16/线程池/D:%5CJavaTools%5Cnodejs%5Cblog%5Csource_posts%5C%E7%BA%BF%E7%A8%8B%E6%B1%A0%5C%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%9B%BE.jpg" alt="线程池图"></p>
+<p>workQueue：缓存队列，用来存放等待被执行的任务。</p>
+<p><img src="//yoursite.com/2019/08/16/线程池/D:%5CJavaTools%5Cnodejs%5Cblog%5Csource_posts%5C%E7%BA%BF%E7%A8%8B%E6%B1%A0%5C%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%9B%BE.jpg" alt></p>
 <h3 id="深入剖析线程池实现原理"><a href="#深入剖析线程池实现原理" class="headerlink" title="深入剖析线程池实现原理"></a>深入剖析线程池实现原理</h3><h4 id="线程池状态："><a href="#线程池状态：" class="headerlink" title="线程池状态："></a>线程池状态：</h4><table>
 <thead>
 <tr>
@@ -509,15 +510,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">redis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">mysql 虚拟机</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">线程池</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">redis</a>
               </li>
             
             <div class="clearfix"></div>
