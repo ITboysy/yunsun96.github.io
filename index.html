@@ -155,6 +155,109 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-并发" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h1><p><img src="//yoursite.com/2019/09/27/并发/C:%5CUsers%5C25890%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1569560929864.png" alt="1569560929864"></p>
+<p>synchoronize  和lock锁在同一个环境（jdk，tomcat)下有效，分布式无效<br>jvm锁解决不了分布式多线程问题<br>内部类中的方法和对象不会被加载</p>
+<p>关于线程，每一个线程都有一个对应的存储空间，称为threadlocal，线程内部存储类。也有一个程序计数器，存放每个线程当前指令地址。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/27/并发/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-redis" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>redis集群，以key当作存储，假设某个key （user) 存放了几百万数据，那么会导致该数据会存放在一个集群主机中，会导致数据存储空间不一致</p>
+<p>因此进行hash分配，对存储数据key进行%主机数量，每一个数据key不同可以分配到不同主机，一可以提高主机数据分配不均问题，也可以快速定位数据在哪台主机上，但同时当进行主机扩容会造成数据位置改变，缓存数据失效</p>
+<p>一致性哈希，以2/32次方圆环作为hash存储地点，对每一个服务器模2/32次方在圆环上找到一个点，每一个数据在圆环上也能找到一个点，顺时针找到的第一个服务器就是要存储的服务器</p>
+<p><img src="//yoursite.com/2019/08/19/redis/D:%5CJavaTools%5Cnodejs%5Cblog%5Csource_posts%5Credis%5C%E4%B8%80%E8%87%B4%E6%80%A7hash%E5%9C%86%E7%8E%AF%E5%9B%BE.png" alt="img"></p>
+<p>影响redis性能的因素:网络（1字节=8bit）带宽/8 处理的数据量、CPU</p>
+<p>redis对性能优化：对数据格式进行优化，redis通过resp协议进行数据传输，减小传输数据量；pipeline，管道传输</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/19/redis/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-redis知识梳理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -249,7 +352,25 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>JVM内存模型：java线程内存模型跟cpu缓存模型类似。</p>
+<p>volatile关键字，使一个共享变量在某个线程修改后对其他线程可见 ；<!--当两个线程操作同一个共享变量时，一个线程对变量的修改对另外线程是不可见的，其他线程操作的还是之前的结果，当添加volatile关键字后会同步获得修改后的结果，并发原理--></p>
+<p>volatile操作的对象在某个线程对其进行修改时，当数据写回到主内存前对该对象属性进行加锁(防止其他线程操作读取到脏数据)，同时对其他工作内存中的副本进行失效，当修改完对象数据后解锁。<img src="//yoursite.com/2019/08/18/jvm/D:%5CJavaTools%5Cnodejs%5Cblog%5Csource_posts%5Cjvm%5Cjava%E5%86%85%E5%AD%98%E6%93%8D%E4%BD%9C%E6%A8%A1%E5%9E%8B.png" alt="1566872546648"></p>
+<p>jvm数据原子操作：<img src="//yoursite.com/2019/08/18/jvm/D:%5CJavaTools%5Cnodejs%5Cblog%5Csource_posts%5Cjvm%5Cjvm%E6%95%B0%E6%8D%AE%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C.png" alt="1566805318900"></p>
+<p>并发变成三大特性：可见性，原子性，有序性</p>
+<p>volatile 只保存可见性和有序性</p>
+<p>join方法，调用后如果该线程没有启动，isAlive（）返回false，join失效，如果线程启动，则等待调用join方法的线程执行完毕后再执行。</p>
+<p>jvm虚拟机分为  1—&gt;类装载子系统  2—&gt;运行时数据区(堆，栈(线程)，本地方法栈，方法区，程序计数器) 3—&gt;执行引擎</p>
+<p>栈中每一个方法对应一块区域</p>
+<p><img src="//yoursite.com/2019/08/18/jvm/D:%5CJavaTools%5Cnodejs%5Cblog%5Csource_posts%5Cjvm%5Cjvm%E6%A0%88.jpg" alt="1567392349576"></p>
+<p>程序计数器随着线程被创建开始执行时被创建，保存的是当前线程所进行下一步操作的指令地址。</p>
+<p>操作数栈存放进行赋值运算操作的临时数值</p>
+<p>本地方法栈是java以前为了操作本地C语言开辟的空间(因为之前java为了和C语言进行交互)</p>
+<p>GC roots 根</p>
+<p>![1567395766900](D:\JavaTools\nodejs\blog\source_posts\jvm\GC 原理.png)</p>
+<p><img src="//yoursite.com/2019/08/18/jvm/D:%5CJavaTools%5Cnodejs%5Cblog%5Csource_posts%5Cjvm%5CGC%E8%B0%83%E4%BC%98%E7%9A%84%E7%9B%AE%E7%9A%84.png" alt="1567395714665"></p>
+<p>synchoronize  和lock锁在同一个环境（jdk，tomcat)下有效，分布式无效<br>jvm锁解决不了分布式多线程问题<br>内部类中的方法和对象不会被加载</p>
+<p>关于线程，每一个线程都有一个对应的存储空间，称为threadlocal，线程内部存储类。也有一个程序计数器，存放每个线程当前指令地址。</p>
+
       
 
       
@@ -257,6 +378,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm，并发编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -385,7 +517,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>当启动redis后，通过docker ps查看redis类似ID的名称</p>
+        <p>docker run -p 6379:6379 –name redis -v /hzero/redis/conf/redis.conf:/etc/redis/redis.conf  -v /hzero/redis/data:/data -d redis redis-server /etc/redis/redis.conf –appendonly yes<br> 根据配置文件创建镜像</p>
+<p>当启动redis后，通过docker ps查看redis类似ID的名称</p>
         
       
 
@@ -576,7 +709,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 一切都是为了未来
+    		&copy; 2020 一切都是为了未来
     	</div>
       	<div class="footer-right">
 		
@@ -681,7 +814,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">mysql 虚拟机</a>
+                <a href="javascript:void(0)" class="js-tag color4">jvm，并发编程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -690,6 +823,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">线程池</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">mysql 虚拟机</a>
               </li>
             
             <div class="clearfix"></div>

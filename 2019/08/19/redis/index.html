@@ -6,21 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>redis操作命令笔记 | 学习与吃</title>
+  <title>学习与吃</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="docker run -p 6379:6379 –name redis -v /hzero/redis/conf/redis.conf:/etc/redis/redis.conf  -v /hzero/redis/data:/data -d redis redis-server /etc/redis/redis.conf –appendonly yes 根据配置文件创建镜像 当启动redis后，通">
+  <meta name="description" content="redis集群，以key当作存储，假设某个key （user) 存放了几百万数据，那么会导致该数据会存放在一个集群主机中，会导致数据存储空间不一致 因此进行hash分配，对存储数据key进行%主机数量，每一个数据key不同可以分配到不同主机，一可以提高主机数据分配不均问题，也可以快速定位数据在哪台主机上，但同时当进行主机扩容会造成数据位置改变，缓存数据失效 一致性哈希，以2/32次方圆环作为has">
 <meta property="og:type" content="article">
-<meta property="og:title" content="redis操作命令笔记">
-<meta property="og:url" content="http://yoursite.com/2019/08/15/redis操作命令笔记/index.html">
+<meta property="og:title" content="学习与吃">
+<meta property="og:url" content="http://yoursite.com/2019/08/19/redis/index.html">
 <meta property="og:site_name" content="学习与吃">
-<meta property="og:description" content="docker run -p 6379:6379 –name redis -v /hzero/redis/conf/redis.conf:/etc/redis/redis.conf  -v /hzero/redis/data:/data -d redis redis-server /etc/redis/redis.conf –appendonly yes 根据配置文件创建镜像 当启动redis后，通">
+<meta property="og:description" content="redis集群，以key当作存储，假设某个key （user) 存放了几百万数据，那么会导致该数据会存放在一个集群主机中，会导致数据存储空间不一致 因此进行hash分配，对存储数据key进行%主机数量，每一个数据key不同可以分配到不同主机，一可以提高主机数据分配不均问题，也可以快速定位数据在哪台主机上，但同时当进行主机扩容会造成数据位置改变，缓存数据失效 一致性哈希，以2/32次方圆环作为has">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/2019/08/15/redis操作命令笔记/D:%5CJavaTools%5Cnodejs%5Cblog%5Csource_posts%5Credis%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0%5C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84redis.png">
-<meta property="og:updated_time" content="2019-08-28T02:41:58.759Z">
+<meta property="og:image" content="http://yoursite.com/2019/08/19/redis/D:%5CJavaTools%5Cnodejs%5Cblog%5Csource_posts%5Credis%5C%E4%B8%80%E8%87%B4%E6%80%A7hash%E5%9C%86%E7%8E%AF%E5%9B%BE.png">
+<meta property="og:updated_time" content="2019-09-15T05:47:57.122Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="redis操作命令笔记">
-<meta name="twitter:description" content="docker run -p 6379:6379 –name redis -v /hzero/redis/conf/redis.conf:/etc/redis/redis.conf  -v /hzero/redis/data:/data -d redis redis-server /etc/redis/redis.conf –appendonly yes 根据配置文件创建镜像 当启动redis后，通">
-<meta name="twitter:image" content="http://yoursite.com/2019/08/15/redis操作命令笔记/D:%5CJavaTools%5Cnodejs%5Cblog%5Csource_posts%5Credis%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0%5C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84redis.png">
+<meta name="twitter:title" content="学习与吃">
+<meta name="twitter:description" content="redis集群，以key当作存储，假设某个key （user) 存放了几百万数据，那么会导致该数据会存放在一个集群主机中，会导致数据存储空间不一致 因此进行hash分配，对存储数据key进行%主机数量，每一个数据key不同可以分配到不同主机，一可以提高主机数据分配不均问题，也可以快速定位数据在哪台主机上，但同时当进行主机扩容会造成数据位置改变，缓存数据失效 一致性哈希，以2/32次方圆环作为has">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/19/redis/D:%5CJavaTools%5Cnodejs%5Cblog%5Csource_posts%5Credis%5C%E4%B8%80%E8%87%B4%E6%80%A7hash%E5%9C%86%E7%8E%AF%E5%9B%BE.png">
   
     <link rel="alternative" href="/atom.xml" title="学习与吃" type="application/atom+xml">
   
@@ -156,45 +156,17 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-redis操作命令笔记" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-redis" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      redis操作命令笔记
-    </h1>
-  
-
-        
-        <a href="/2019/08/15/redis操作命令笔记/" class="archive-article-date">
-  	<time datetime="2019-08-15T13:29:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-15</time>
-</a>
-        
-      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>docker run -p 6379:6379 –name redis -v /hzero/redis/conf/redis.conf:/etc/redis/redis.conf  -v /hzero/redis/data:/data -d redis redis-server /etc/redis/redis.conf –appendonly yes<br> 根据配置文件创建镜像</p>
-<p>当启动redis后，通过docker ps查看redis类似ID的名称</p>
-<a id="more"></a>
-
-<p>redis客户端连接命令：docker exec -it <strong>0b63b7eacc29</strong> redis-cli </p>
-<p>set xxx ‘xxx’  设置值可以覆盖之前值，setnx xxx ’xxx’  存在则不set返回0（可以实现最简单的分布式锁，当高并发多条线程进行时保证不会出现脏读等）</p>
-<p>setex 设置存在时间，过期清空</p>
-<p>setrange  xxx 10 ww <!--(设置XXX从第10位替换成WW，下标0开始)--></p>
-<p>incr decr  递增和递减1方法 （处理播放量等）</p>
-<p>incrby decrby 递增递减指定长度 <!--incrby xxx  10--></p>
-<p>hgetall 获得所有hash对象的值</p>
-<p>list: lpush 从头部开始添加元素，先进后出</p>
-<p>​       rpush 从尾部添加元素，先进先出</p>
-<p>lrange xxx 0 -1 (表示从头取到尾)</p>
-<p>linsert xxx before [集合元素]  [插入的元素]</p>
-<p>lset xxx 0 ‘xxx’ 替换指定下标元素</p>
-<p>lrem  xxx [移除的个数]  [移除的元素值] 删除元素 </p>
-<p><img src="//yoursite.com/2019/08/15/redis操作命令笔记/D:%5CJavaTools%5Cnodejs%5Cblog%5Csource_posts%5Credis%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0%5C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84redis.png" alt="1566220393264"></p>
-<p>BRPOP  会等待数据（消息）进行操作（当数据没有的时候）</p>
+        <p>redis集群，以key当作存储，假设某个key （user) 存放了几百万数据，那么会导致该数据会存放在一个集群主机中，会导致数据存储空间不一致</p>
+<p>因此进行hash分配，对存储数据key进行%主机数量，每一个数据key不同可以分配到不同主机，一可以提高主机数据分配不均问题，也可以快速定位数据在哪台主机上，但同时当进行主机扩容会造成数据位置改变，缓存数据失效</p>
+<p>一致性哈希，以2/32次方圆环作为hash存储地点，对每一个服务器模2/32次方在圆环上找到一个点，每一个数据在圆环上也能找到一个点，顺时针找到的第一个服务器就是要存储的服务器</p>
+<p><img src="//yoursite.com/2019/08/19/redis/D:%5CJavaTools%5Cnodejs%5Cblog%5Csource_posts%5Credis%5C%E4%B8%80%E8%87%B4%E6%80%A7hash%E5%9C%86%E7%8E%AF%E5%9B%BE.png" alt="img"></p>
+<p>影响redis性能的因素:网络（1字节=8bit）带宽/8 处理的数据量、CPU</p>
+<p>redis对性能优化：对数据格式进行优化，redis通过resp协议进行数据传输，减小传输数据量；pipeline，管道传输</p>
 
       
 
@@ -274,7 +246,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/15/redis操作命令笔记/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/19/redis/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -288,18 +260,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/08/16/线程池/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/09/27/并发/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          线程池
+          (no title)
         
       </div>
     </a>
   
   
-    <a href="/2019/08/11/关于添加数据库远程访问权限/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">关于添加数据库远程访问权限</div>
+    <a href="/2019/08/18/redis知识梳理/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">redis知识梳理</div>
       <i class="icon-circle-right"></i>
     </a>
   
